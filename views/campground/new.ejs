@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <div class="col-6 offset-3 vh-90">
+        <form method="post" action="/campgrounds" class="needs-validation" novalidate enctype="multipart/form-data">
+            <!-- Title -->
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="campground[title]" placeholder="Campground Title" required>
+                <div class="invalid-feedback">
+                    Please enter a title for the campground.
+                </div>
+            </div>
+            <!-- Location -->
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="campground[location]" placeholder="Campground Location" required>
+                <div class="invalid-feedback">
+                    Please enter a location for the campground.
+                </div>
+            </div>
+            <!-- Image URL -->    
+            <div class="mb-3">
+                <input type="file" class="form-control" id="image" name="image" multiple>
+            </div>
+            
+            <!-- Image Preview -->
+            <div class="mb-3">
+                <div id="image-preview-container" class="mt-3"></div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" id="description" name="campground[description]" rows="4" placeholder="Description" required></textarea>
+                <div class="invalid-feedback">
+                    Please enter a description for the campground.
+                </div>
+            </div>
+            <!-- Price -->
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="price" name="campground[price]" aria-label="Amount (to the nearest dollar)" placeholder="Enter price (0)" min="1" step="0.01" required>
+                <div class="invalid-feedback">
+                    Please enter a valid price.
+                </div>
+            </div>       
+            <!-- Submit Button -->
+            <div class="mb-3">
+                <button class="btn btn-success">Add Campground</button>
+            </div>
+        </form>
+        <!-- Cancel Button -->
+        <a class="d-block" href="/campgrounds">Go To Campgrounds</a>
+    </div>
+</div>
+
+

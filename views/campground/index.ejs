@@ -1,0 +1,63 @@
+<% layout('layouts/boilerplate') %>
+<!-- <h1 class="text-center my-4">Campgrounds <%= `(${campgrounds.length})` %></h1> -->
+
+<div class="container vw-80">
+    <div id="map" class="mb-4 mt-4 card" style="width: 100%; height: 400px;"></div>
+    <div class="row">
+        <% for (let campground of campgrounds) { %>
+            <div class="col-md-4 mb-4">
+                <a href="/campgrounds/<%= campground._id %>" class="text-decoration-none">
+                    <div class="card shadow-sm">
+                        <!-- Image Carousel with Custom Delays for Each Image -->
+                        <div id="carousel-<%= campground._id %>" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <% campground.images.forEach((img, index) => { %>
+                                    <div class="carousel-item <%= index === 0 ? 'active' : '' %>" 
+                                         data-bs-interval="<%= Math.floor((Math.random()*1000)+7000) %>">
+                                        <img crossorigin="anonymous" src="<%= img.url %>" alt="Image of <%= campground.title %>" class="d-block w-100 img-fluid">
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title"><%= campground.title %></h5>
+                            <p class="card-text"><%= campground.description %></p>
+                            <p class="card-text">
+                                <small class="text-muted"><%= campground.location %></small>
+                            </p> 
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    const maptilerApiKey = '<%-process.env.MAPTILER_API_KEY%>';
+    const campgrounds = {features:<%-JSON.stringify(campgrounds)%>}
+</script>
+<script src="/javascript/clusterMap.js"></script>
+
+
+<!-- Add Hover Effect and Styling -->
+<style>
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scaling and shadow */
+  }
+
+  .card:hover {
+    transform: scale(1.05);  /* Scale the card slightly more */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Add a soft shadow for depth on hover */
+  }
+
+  .carousel-inner {
+    height: 200px; /* You can adjust this height to your preference */
+  }
+
+  .carousel-item img {
+    object-fit: cover; /* Ensure the image covers the area without distorting */
+    height: 100%; /* Make sure the image takes up the full height */
+  }
+</style>

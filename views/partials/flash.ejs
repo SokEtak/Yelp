@@ -1,0 +1,34 @@
+<!-- Success Message (if any) -->
+<% if (success && success.length > 0) { %>
+    <div class="alert alert-success alert-dismissible fade show text-center mt-4" role="alert">
+        <h4 class="alert-heading"><%= success %></h4>
+    </div>
+<% } %>
+
+<!-- Error Message (if any) -->
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show text-center mt-4" role="alert">
+        <h4 class="alert-heading"><%= error %></h4>
+    </div>
+<% } %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to handle fade-out and hide
+        const handleAlertFadeOut = (selector) => {
+            const alertElement = document.querySelector(selector);
+            if (alertElement) {
+                setTimeout(() => {
+                    alertElement.classList.remove('show'); // Trigger fade-out
+                    setTimeout(() => {
+                        alertElement.style.display = 'none'; // Hide completely
+                    }, 150); // Match fade-out duration
+                }, 2000); // 2-second delay
+            }
+        };
+
+        // Handle success and error alerts
+        handleAlertFadeOut(".alert-success");
+        handleAlertFadeOut(".alert-danger");
+    });
+</script>
